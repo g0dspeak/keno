@@ -1,0 +1,38 @@
+
+.table>tr>th, .amount_table_header {
+    text-align: center;
+}
+
+table, tr, td, th {
+    position: relative;
+    cursor: default;
+}
+table {
+    background: #B3E5FC33;
+}
+table tbody td {
+    color: #81C784;
+    font-weight: 700;
+}
+table th, .wins_table h3 {
+    color: #00838F;
+    font-weight: 700;
+}
+.table > tbody > tr > th.amount_intersected_header {
+    padding: 0 16px;
+}
+.amount_intersected_header span {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+    transform-origin: 0 50%;
+    transform: rotate(-90deg);
+    white-space: nowrap;
+    display: block;
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+}

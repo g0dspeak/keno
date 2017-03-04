@@ -1,0 +1,34 @@
+.combination-keyboard {
+    padding: 5px;
+    border: 1px solid transparent;
+}
+
+.combination_numbers {
+    display:none;
+}
+
+.combination_numbers+label
+{
+    cursor: pointer;
+    background: #fff;
+    height: 23px;
+    width: 23px;
+    display: inline-block;
+    border-radius: 50%;
+    padding: 2px;
+}
+.combination_numbers:checked+label {
+    background: lightgray;
+}
+.combination_numbers:disabled+label {
+    background: #a7a7a7;
+    color: gray;
+    cursor: default;
+}
+
+.combination {
+    color: #81C784;
+}
+.combination b {
+    text-decoration: underline;
+}
