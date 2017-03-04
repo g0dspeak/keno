@@ -1,6 +1,6 @@
 # README #
 
-Keno Lottery simulation, Providing useful interface counting the chances for the hypothetical win.
+Keno Lottery simulation. Provides useful interface counting the chances for the hypothetical win.
 
 ### What is this repository for? ###
 
@@ -16,7 +16,7 @@ Keno Lottery simulation, Providing useful interface counting the chances for the
 ### Contribution guidelines ###
 
 * This game is just a simulation of a real game.
-* This game does not have the ability to win real money.
+* This game does not give the ability to win real money.
 * It has been created to make counting the chances for the hypothetical win
 
 ### Who do I talk to? ###
