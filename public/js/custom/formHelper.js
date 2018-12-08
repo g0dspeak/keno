@@ -133,9 +133,7 @@ var FormHelper = {
                     FormHelper.progressBar(false);
                     progressBar(0);
 
-                    var results = JSON.parse(data);
-
-                    FormHelper.showResults(results);
+                    FormHelper.showResults(data);
 
                 }, 500);
             },

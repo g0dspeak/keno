@@ -27,6 +27,11 @@ class Game implements GameInterface
         $this->results = new Results($this->userData);
     }
 
+    public function getResults()
+    {
+        return $this->results;
+    }
+
     public function play()
     {
         if ($this->shouldPlayUntilAmountOfGames()) {
@@ -34,8 +39,11 @@ class Game implements GameInterface
         } elseif ($this->shouldPlayUntilMaxWin()) {
             $this->playUntilMaxWin();
         }
+//        dd(123);
 
         $this->results->countTotalProfit();
+
+        return $this;
     }
 
     protected function playUntilAmountOfGames()
@@ -62,6 +70,7 @@ class Game implements GameInterface
             $randomTwentyNumbers = $this->numbers->newLotteryNumbers();
 
             $userCombination = $this->userData->getCombination();
+//            _d($userCombination);
             $intersect = array_intersect($userCombination, $randomTwentyNumbers);
 
             $this->results->push($intersect);

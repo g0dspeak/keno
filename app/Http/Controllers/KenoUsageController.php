@@ -30,8 +30,7 @@ class KenoUsageController extends Controller
         set_time_limit(90);
 
         $keno = new Game($request->all());
-        $keno->play();
 
-        echo json_encode($keno->results);
+        return response()->json($keno->play()->getResults());
     }
 }

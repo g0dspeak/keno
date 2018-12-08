@@ -42,7 +42,7 @@ class UserData implements UserDataInterface
         $this->customCombination = (bool) $data['custom_combination'];
         $this->amountOfRandomNumbers = $data['amount_of_random_numbers'];
 
-        $this->countOfUserNumbers = count($this->combination) ?: $data['amount_of_random_numbers'];
+        $this->countOfUserNumbers = count($this->combination) ?: $this->amountOfRandomNumbers;
     }
 
     public function getCombination()
