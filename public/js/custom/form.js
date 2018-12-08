@@ -8,6 +8,25 @@ jQuery(function($){
     FormHelper.switchFormActivation(true);
     FormHelper.progressBar(false);
 
+    // custom/random combination engine
+    $('#custom_combination').change(function (e) {
+        FormHelper.enableDisableMaxWin();
+        FormHelper.enableDisableKeyboard();
+
+        if (!$(this).prop('checked')) {
+            $('#amount_of_random_numbers_block').show();
+            $(FormHelper.keyBoardCombinationClass).hide();
+            $(FormHelper.combinationClass).hide();
+        } else {
+            $('#amount_of_random_numbers_block').hide();
+            $(FormHelper.keyBoardCombinationClass).show();
+            $(FormHelper.combinationClass).show();
+        }
+    });
+    $('#amount_of_random_numbers').change(function (e) {
+        FormHelper.enableDisableMaxWin();
+    });
+
     // tooltip
     $('[data-toggle="tooltip"]').tooltip();
     $("[data-toggle='tooltip']").on("mouseover", function(){

@@ -12,6 +12,23 @@
 
             <div class="combination"></div>
 
+            <input id="custom_combination" name="custom_combination" type="checkbox" checked data-toggle="toggle" data-on="Custom" data-off="Random">
+
+            <span id="amount_of_random_numbers_block" style="display: none;">
+                <h4><b>Amount of random combination numbers:</b></h4>
+                <div class="row money_rate">
+                    <span class="req-input" >
+                        <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input amount of random combination numbers"> </span>
+
+                        <select id="amount_of_random_numbers" name="amount_of_random_numbers" type="select">
+                            @foreach(range(1, 10) as $val)
+                                <option value="{{ $val }}">{{ $val }}</option>
+                            @endforeach
+                        </select>
+                    </span>
+                </div> <br/>
+            </span>
+
             <div class="row">
                 <br/>
                 <div class="combination-keyboard" type="keyboard">

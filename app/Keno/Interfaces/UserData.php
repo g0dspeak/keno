@@ -11,5 +11,10 @@ namespace App\Keno\Interfaces;
 
 interface UserData
 {
-    public function __construct($data);
+    public function __construct(Numbers $numbers, $data);
+
+    /**
+     * @return array
+     */
+    public function getCombination();
 }

@@ -17,9 +17,9 @@ class KenoUsageController extends Controller
         $winsTable = WinsTable::WINS_TABLE;
         $promptOption = '<option value="0" disabled>Choose</option>';
 
-        $jsFilesHeader = [url('/js/custom/formHelper.js'), url('/js/custom/form.js')];
+        $jsFilesHeader = [asset('/js/custom/formHelper.js'), asset('/js/custom/form.js')];
         $jsFilesFooter = [];
-        $cssFiles = [url('/css/numbers_combination.css'), url('/css/custom/form.css'), url('/css/custom/table.css')];
+        $cssFiles = [asset('/css/numbers_combination.css'), asset('/css/custom/form.css'), asset('/css/custom/table.css')];
 
         return view('keno.index', compact('winsTable', 'promptOption', 'cssFiles', 'jsFilesFooter', 'jsFilesHeader'));
     }
@@ -29,9 +29,7 @@ class KenoUsageController extends Controller
     {
         set_time_limit(90);
 
-        $data = $request->all();
-
-        $keno = new Game($data);
+        $keno = new Game($request->all());
         $keno->play();
 
         echo json_encode($keno->results);

@@ -20,12 +20,12 @@ class Numbers implements NumberInterface
         $this->numbers = range(1, 70);
     }
 
-    public function newLotteryNumbers()
+    public function newLotteryNumbers($amount = 20)
     {
         $numbers = $this->numbers;
 
         $randomTwentyNumbers = [];
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < $amount; $i++) {
             $randomKey = array_rand($numbers);
             $randomValue = $numbers[$randomKey];
 

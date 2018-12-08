@@ -1,6 +1,7 @@
 var FormHelper = {
     combinationClass: '.combination',
     keyBoardCombinationClass: '.combination-keyboard',
+    customCombinationId: '#custom_combination',
 
     pleaseWait: $('#pleaseWaitDialog'),
 
@@ -9,9 +10,13 @@ var FormHelper = {
     games_amount: null,
     max_win: null,
     play_until: null,
+    amount_of_random_numbers: null,
+    custom_combination: null,
 
     provideMaxWinOptions: function () {
-        var amountOfNumbers = FormHelper.keyBoardCombination.length;
+        var amountOfNumbers = !$(FormHelper.customCombinationId).prop('checked')
+            ? $('#amount_of_random_numbers').val()
+            : FormHelper.keyBoardCombination.length;
 
         var winsOptions = WinsTable[amountOfNumbers];
 
@@ -27,7 +32,7 @@ var FormHelper = {
     enableDisableMaxWin: function () {
         var Form = $("[data-form-container]");
 
-        if (FormHelper.keyBoardCombination.length < 1) {
+        if ($(FormHelper.customCombinationId).prop('checked') && FormHelper.keyBoardCombination.length < 1) {
             $('#max_win').attr('disabled', true);
             $('#games_amount').click();
 
@@ -41,7 +46,7 @@ var FormHelper = {
         }
     },
     enableDisableKeyboard: function () {
-        if (FormHelper.keyBoardCombination.length == 10) {
+        if (FormHelper.keyBoardCombination.length === 10 || !$(FormHelper.customCombinationId).prop('checked')) {
             $(FormHelper.keyBoardCombinationClass + ' input[type="checkbox"]').each(function () {
                 if (!$(this).is(':checked')) {
                     $(this).attr('disabled', true);
@@ -103,7 +108,9 @@ var FormHelper = {
             money_rate: FormHelper.money_rate,
             games_amount: FormHelper.games_amount,
             max_win: FormHelper.max_win,
-            play_until: FormHelper.play_until
+            play_until: FormHelper.play_until,
+            amount_of_random_numbers: FormHelper.amount_of_random_numbers,
+            custom_combination: FormHelper.custom_combination
         };
 
         var pleaseWait = $('#pleaseWaitDialog');
@@ -234,12 +241,14 @@ var FormHelper = {
                     error += FormHelper.setRow(selectedVal, Parent);
                     break;
                 case "keyboard":
-                    var countOfCheckedElements = $('.combination-keyboard input:checkbox:checked').length;
-                    if (countOfCheckedElements < 1) {
-                        $(FormHelper.keyBoardCombinationClass).addClass('error');
-                        error++;
-                    } else {
-                        $(FormHelper.keyBoardCombinationClass).removeClass('error');
+                    if ($('#amount_of_random_numbers').prop('checked')) {
+                        var countOfCheckedElements = $('.combination-keyboard input:checkbox:checked').length;
+                        if (countOfCheckedElements < 1) {
+                            $(FormHelper.keyBoardCombinationClass).addClass('error');
+                            error++;
+                        } else {
+                            $(FormHelper.keyBoardCombinationClass).removeClass('error');
+                        }
                     }
                     break;
             }
@@ -254,6 +263,8 @@ var FormHelper = {
             FormHelper.games_amount = $('.games_amount input').val();
             FormHelper.max_win = $('#max_win_options').val();
             FormHelper.play_until = $('.play_until input:checked').val();
+            FormHelper.amount_of_random_numbers = $('#amount_of_random_numbers').val();
+            FormHelper.custom_combination = $(FormHelper.customCombinationId).prop('checked') ? 1 : 0;
 
             $('.submit-form').prop('disabled', false);
 

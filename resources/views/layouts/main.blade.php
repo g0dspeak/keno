@@ -13,14 +13,16 @@
 
 
     <!-- Styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="/css/app.custom.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/bootstrap.toggle.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/app.custom.css') }}" rel="stylesheet" type="text/css">
     @yield('header_styles')
 
     <!-- Scripts -->
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/app.custom.js"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/app.custom.js') }}"></script>
     @yield('header_scripts')
     <style>
 

@@ -23,7 +23,7 @@ class Game implements GameInterface
     public function __construct($data)
     {
         $this->numbers = new Numbers();
-        $this->userData = new UserData($data);
+        $this->userData = new UserData($this->numbers, $data);
         $this->results = new Results($this->userData);
     }
 
@@ -41,11 +41,11 @@ class Game implements GameInterface
     protected function playUntilAmountOfGames()
     {
         $gamesAmount = $this->userData->gamesAmount;
-        $userCombination = $this->userData->combination;
 
         for ($i = 0; $i < $gamesAmount; $i++) {
             $randomTwentyNumbers = $this->numbers->newLotteryNumbers();
 
+            $userCombination = $this->userData->getCombination();
             $intersect = array_intersect($userCombination, $randomTwentyNumbers);
 
             $this->results->push($intersect);
@@ -54,7 +54,6 @@ class Game implements GameInterface
 
     protected function playUntilMaxWin()
     {
-        $userCombination = $this->userData->combination;
         $maxWin = $this->userData->maxWin;
         $maxWin = explode('/', $maxWin);
         $needIntersectCount = (int) $maxWin[0];
@@ -62,6 +61,7 @@ class Game implements GameInterface
         for (; $this->results->countOfCurrentIntersect != $needIntersectCount;) {
             $randomTwentyNumbers = $this->numbers->newLotteryNumbers();
 
+            $userCombination = $this->userData->getCombination();
             $intersect = array_intersect($userCombination, $randomTwentyNumbers);
 
             $this->results->push($intersect);
