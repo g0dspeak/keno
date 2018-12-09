@@ -88,7 +88,7 @@
                 <div class="row max_win_money">
                     <span class="req-input" >
                         <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input max win"> </span>
-                        <input name="max_win_money" type="number" data-min-length="1" placeholder="Money profit" value="0">
+                        <input name="max_win_money" type="text" data-min-length="1" placeholder="Money profit" value="1">
                     </span>
                 </div>
             </div>

@@ -14,6 +14,20 @@ let FormHelper = {
     amount_of_random_numbers: null,
     custom_combination: null,
 
+    initCustomCombinationCheckbox: function (checked) {
+        FormHelper.enableDisableMaxWin();
+        FormHelper.enableDisableKeyboard();
+
+        if (!checked) {
+            $('#amount_of_random_numbers_block').show();
+            $(FormHelper.keyBoardCombinationClass).hide();
+            $(FormHelper.combinationClass).hide();
+        } else {
+            $('#amount_of_random_numbers_block').hide();
+            $(FormHelper.keyBoardCombinationClass).show();
+            $(FormHelper.combinationClass).show();
+        }
+    },
     provideMaxWinOptions: function () {
         let amountOfNumbers = !$(FormHelper.customCombinationId).prop('checked')
             ? $('#amount_of_random_numbers').val()
@@ -226,15 +240,6 @@ let FormHelper = {
 
             switch(type) {
                 case "text":
-                    minLength = $(this).data("min-length");
-                    if (typeof minLength === "undefined") {
-                        minLength = 0;
-                    }
-
-                    numberIsValid = numberValid(val, $(this).attr('min'), $(this).attr('max'), minLength, null);
-
-                    error += FormHelper.setRow(numberIsValid, Parent);
-                    break;
                 case "number":
                     minLength = $(this).data("min-length");
                     if (typeof minLength === "undefined") {
@@ -243,6 +248,8 @@ let FormHelper = {
 
                     numberIsValid = numberValid(val, $(this).attr('min'), $(this).attr('max'), minLength, null);
 
+                    console.log(val, numberIsValid);
+
                     error += FormHelper.setRow(numberIsValid, Parent);
                     break;
                 case "select":
@@ -250,7 +257,7 @@ let FormHelper = {
                     error += FormHelper.setRow(selectedVal, Parent);
                     break;
                 case "keyboard":
-                    if ($('#amount_of_random_numbers').prop('checked')) {
+                    if ($(FormHelper.customCombinationId).prop('checked')) {
                         let countOfCheckedElements = $('.combination-keyboard input:checkbox:checked').length;
                         if (countOfCheckedElements < 1) {
                             $(FormHelper.keyBoardCombinationClass).addClass('error');

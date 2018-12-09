@@ -7,6 +7,9 @@ function dd() {
 
 
 function numberValid(value, min, max, minlength, maxLength) {
+    if (!Number.parseInt(value)) {
+        return false;
+    }
     if (min !== null && value < min) {
         return false;
     }
