@@ -1,4 +1,4 @@
-Redirect /index.php http://keno.local/public
+Redirect /index.php /public
 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
