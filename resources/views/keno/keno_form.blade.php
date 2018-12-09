@@ -10,8 +10,9 @@
 
             <h4><b>Combination:</b></h4>
 
+            <hr>
             <div class="combination"></div>
-
+            <hr>
             <input id="custom_combination" name="custom_combination" type="checkbox" checked data-toggle="toggle" data-on="Custom" data-off="Random">
 
             <span id="amount_of_random_numbers_block" style="display: none;">
@@ -63,7 +64,10 @@
                 <label for="games_amount">Amount of games</label>
 
                 <br/><input type="radio" id="max_win" name="play_until" value="{{ \App\Keno\Game::MAX_WIN }}"/>
-                <label for="max_win">Max win</label>
+                <label for="max_win">Max win (combination match)</label>
+
+                <br/><input type="radio" id="max_win_money" name="play_until" value="{{ \App\Keno\Game::MAX_WIN_MONEY }}"/>
+                <label for="max_win_money">Max win (money profit)</label>
 
                 <div class="row games_amount">
                     <span class="req-input" >
@@ -78,6 +82,13 @@
                         <select id="max_win_options" name="max_win[]" type="select">
                             {!! $promptOption !!}
                         </select>
+                    </span>
+                </div>
+
+                <div class="row max_win_money">
+                    <span class="req-input" >
+                        <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input max win"> </span>
+                        <input name="max_win_money" type="number" data-min-length="1" placeholder="Money profit" value="0">
                     </span>
                 </div>
             </div>

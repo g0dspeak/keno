@@ -11,6 +11,8 @@ namespace App\Keno;
 
 class Results
 {
+    public $timeoutError = false;
+
     public $userData;
     public $winTableSection;
 
@@ -31,6 +33,8 @@ class Results
     public function countTotalProfit()
     {
         $this->totalProfit = $this->totalWin - $this->totalSpent;
+
+        return $this->totalProfit;
     }
 
     public function push($intersect)

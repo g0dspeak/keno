@@ -1,4 +1,4 @@
-var FormHelper = {
+let FormHelper = {
     combinationClass: '.combination',
     keyBoardCombinationClass: '.combination-keyboard',
     customCombinationId: '#custom_combination',
@@ -9,36 +9,39 @@ var FormHelper = {
     money_rate: null,
     games_amount: null,
     max_win: null,
+    max_win_money: null,
     play_until: null,
     amount_of_random_numbers: null,
     custom_combination: null,
 
     provideMaxWinOptions: function () {
-        var amountOfNumbers = !$(FormHelper.customCombinationId).prop('checked')
+        let amountOfNumbers = !$(FormHelper.customCombinationId).prop('checked')
             ? $('#amount_of_random_numbers').val()
             : FormHelper.keyBoardCombination.length;
 
-        var winsOptions = WinsTable[amountOfNumbers];
+        let winsOptions = WinsTable[amountOfNumbers];
 
         $('#max_win_options').html(promptOption);
-        for (var o in winsOptions) {
-            var optionVal = o + '/' + amountOfNumbers;
-            var winVal = winsOptions[o];
-            var option = '<option value="' + optionVal + '">' + optionVal + ' (x' + winVal + ')</option>';
+        for (let o in winsOptions) {
+            let optionVal = o + '/' + amountOfNumbers;
+            let winVal = winsOptions[o];
+            let option = '<option value="' + optionVal + '">' + optionVal + ' (x' + winVal + ')</option>';
 
             $('#max_win_options').append(option);
         }
     },
     enableDisableMaxWin: function () {
-        var Form = $("[data-form-container]");
+        let Form = $("[data-form-container]");
 
         if ($(FormHelper.customCombinationId).prop('checked') && FormHelper.keyBoardCombination.length < 1) {
             $('#max_win').attr('disabled', true);
+            $('#max_win_money').attr('disabled', true);
             $('#games_amount').click();
 
             FormHelper.validateForm(Form);
         } else {
             $('#max_win').removeAttr('disabled');
+            $('#max_win_money').removeAttr('disabled');
 
             FormHelper.provideMaxWinOptions();
 
@@ -82,38 +85,40 @@ var FormHelper = {
     },
     watchForCombination: function () {
         $(FormHelper.combinationClass).html('');
-
         if (FormHelper.keyBoardCombination.length) {
-            var number;
-            for (var index in FormHelper.keyBoardCombination) {
+            let number;
+            for (let index in FormHelper.keyBoardCombination) {
                 number = FormHelper.keyBoardCombination[index];
                 $(FormHelper.combinationClass).append("<b>" + number + "</b>&nbsp;");
             }
         }
+
+        FormHelper.amount_of_random_numbers = $('#amount_of_random_numbers').val();
     },
     submitForm: function (e, target) {
         e.preventDefault();
-        var Form = target.closest("[data-form-container]");
+        let Form = target.closest("[data-form-container]");
 
-        var formIsValid = FormHelper.validateForm(Form);
+        let formIsValid = FormHelper.validateForm(Form);
 
         if (formIsValid) {
             FormHelper.countResultsAjax();
         }
     },
     countResultsAjax: function () {
-        var formData = {
+        let formData = {
             _token: _token,
             combination: FormHelper.keyBoardCombination,
             money_rate: FormHelper.money_rate,
             games_amount: FormHelper.games_amount,
             max_win: FormHelper.max_win,
+            max_win_money: FormHelper.max_win_money,
             play_until: FormHelper.play_until,
             amount_of_random_numbers: FormHelper.amount_of_random_numbers,
             custom_combination: FormHelper.custom_combination
         };
 
-        var pleaseWait = $('#pleaseWaitDialog');
+        let pleaseWait = $('#pleaseWaitDialog');
 
         FormHelper.switchFormActivation(false);
         pleaseWait.modal('show');
@@ -142,9 +147,9 @@ var FormHelper = {
 
     },
     showResults: function (results) {
-        var winsTable = $('.wins_table');
-        var winsResult = $('.wins_result');
-        var winsCell = $('.win_cell');
+        let winsTable = $('.wins_table');
+        let winsResult = $('.wins_result');
+        let winsCell = $('.win_cell');
 
         winsResult.find('.total_spent').text(results.totalSpent + ' $');
         winsResult.find('.total_win').text(results.totalWin + ' $');
@@ -152,21 +157,27 @@ var FormHelper = {
 
         winsCell.text('');
 
-        var amountOfChosenNumbers = results.userData.countOfUserNumbers;
-        var winIntersects = results.winIntersects;
+        let amountOfChosenNumbers = results.userData.countOfUserNumbers;
+        let winIntersects = results.winIntersects;
 
-        for (var a in winIntersects) {
+        for (let a in winIntersects) {
             $('#win_cell_' + amountOfChosenNumbers + '_' + a).text(winIntersects[a].length);
+        }
+
+        if (results.timeoutError) {
+            $('.error-info-helper-block').show();
+        } else {
+            $('.error-info-helper-block').hide();
         }
     },
     progressWhileAjax: function () {
-        var xhr = new window.XMLHttpRequest();
+        let xhr = new window.XMLHttpRequest();
 
         // Download progress
         xhr.addEventListener("progress", function(evt) {
             if (evt.lengthComputable) {
-                var percentComplete = evt.loaded / evt.total * 100;
-                if (percentComplete == 100) {
+                let percentComplete = evt.loaded / evt.total * 100;
+                if (percentComplete === 100) {
                     percentComplete = 92;
                 }
                 progressBar(percentComplete);
@@ -174,8 +185,8 @@ var FormHelper = {
         }, false);
         xhr.upload.addEventListener("progress", function(evt) {
             if (evt.lengthComputable) {
-                var percentComplete = evt.loaded / evt.total * 100;
-                if (percentComplete == 100) {
+                let percentComplete = evt.loaded / evt.total * 100;
+                if (percentComplete === 100) {
                     percentComplete = 92;
                 }
                 progressBar(percentComplete);
@@ -194,7 +205,7 @@ var FormHelper = {
         }
     },
     progressBar: function (enable) {
-        var pleaseWait = $('#pleaseWaitDialog');
+        let pleaseWait = $('#pleaseWaitDialog');
 
         if (enable) {
             pleaseWait.modal('show');
@@ -203,20 +214,20 @@ var FormHelper = {
         }
     },
     validateForm: function (target) {
-        var error = 0;
+        let error = 0;
         target.find(".req-input input, .req-input select, .combination-keyboard").each(function(){
-            var type = $(this).attr("type");
+            let type = $(this).attr("type");
 
-            var Parent = $(this).parent();
-            var val = $(this).val();
-            var minLength;
-            var numberIsValid;
-            var selectedVal;
+            let Parent = $(this).parent();
+            let val = $(this).val();
+            let minLength;
+            let numberIsValid;
+            let selectedVal;
 
             switch(type) {
                 case "text":
                     minLength = $(this).data("min-length");
-                    if (typeof minLength == "undefined") {
+                    if (typeof minLength === "undefined") {
                         minLength = 0;
                     }
 
@@ -226,7 +237,7 @@ var FormHelper = {
                     break;
                 case "number":
                     minLength = $(this).data("min-length");
-                    if (typeof minLength == "undefined") {
+                    if (typeof minLength === "undefined") {
                         minLength = 0;
                     }
 
@@ -240,7 +251,7 @@ var FormHelper = {
                     break;
                 case "keyboard":
                     if ($('#amount_of_random_numbers').prop('checked')) {
-                        var countOfCheckedElements = $('.combination-keyboard input:checkbox:checked').length;
+                        let countOfCheckedElements = $('.combination-keyboard input:checkbox:checked').length;
                         if (countOfCheckedElements < 1) {
                             $(FormHelper.keyBoardCombinationClass).addClass('error');
                             error++;
@@ -252,14 +263,15 @@ var FormHelper = {
             }
         });
 
-        var formContainer = target;
-        if (error == 0) {
+        let formContainer = target;
+        if (error === 0) {
             formContainer.css("background", "#C8E6C9");
             formContainer.css("color", "#2E7D32");
 
             FormHelper.money_rate = $('.money_rate input').val();
             FormHelper.games_amount = $('.games_amount input').val();
             FormHelper.max_win = $('#max_win_options').val();
+            FormHelper.max_win_money = $('[name="max_win_money"]').val();
             FormHelper.play_until = $('.play_until input:checked').val();
             FormHelper.amount_of_random_numbers = $('#amount_of_random_numbers').val();
             FormHelper.custom_combination = $(FormHelper.customCombinationId).prop('checked') ? 1 : 0;

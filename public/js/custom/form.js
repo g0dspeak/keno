@@ -25,6 +25,7 @@ jQuery(function($){
     });
     $('#amount_of_random_numbers').change(function (e) {
         FormHelper.enableDisableMaxWin();
+        FormHelper.watchForCombination();
     });
 
     // tooltip
@@ -53,11 +54,19 @@ jQuery(function($){
     $('#max_win').on('click', function () {
         $('.max_win').show(100);
         $('.games_amount').hide(100);
+        $('.max_win_money').hide(100);
     });
 
     $('#games_amount').on('click', function () {
         $('.max_win').hide(100);
         $('.games_amount').show(100);
+        $('.max_win_money').hide(100);
+    });
+
+    $('#max_win_money').on('click', function () {
+        $('.max_win').hide(100);
+        $('.games_amount').hide(100);
+        $('.max_win_money').show(100);
     });
 
     $(FormHelper.keyBoardCombinationClass + ' input[type="checkbox"]').on('click', function () {

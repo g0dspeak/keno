@@ -24,6 +24,7 @@ class UserData implements UserDataInterface
     public $moneyRate;
     public $gamesAmount;
     public $maxWin;
+    public $maxWinMoney;
     public $playUntil;
     public $customCombination;
     public $amountOfRandomNumbers;
@@ -38,6 +39,7 @@ class UserData implements UserDataInterface
         $this->moneyRate = $data['money_rate'];
         $this->gamesAmount = $data['games_amount'];
         $this->maxWin = $data['max_win'];
+        $this->maxWinMoney = $data['max_win_money'];
         $this->playUntil = $data['play_until'];
         $this->customCombination = (bool) $data['custom_combination'];
         $this->amountOfRandomNumbers = $data['amount_of_random_numbers'];

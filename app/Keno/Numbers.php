@@ -24,16 +24,16 @@ class Numbers implements NumberInterface
     {
         $numbers = $this->numbers;
 
-        $randomTwentyNumbers = [];
+        $randomNumbersSet = [];
         for ($i = 0; $i < $amount; $i++) {
             $randomKey = array_rand($numbers);
             $randomValue = $numbers[$randomKey];
 
             unset($numbers[$randomKey]);
 
-            $randomTwentyNumbers[] = $randomValue;
+            $randomNumbersSet[] = $randomValue;
         }
 
-        return $randomTwentyNumbers;
+        return $randomNumbersSet;
     }
 }

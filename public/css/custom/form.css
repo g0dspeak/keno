@@ -398,6 +398,6 @@
     cursor: pointer;
 }
 
-.max_win {
+.max_win, .max_win_money {
     display: none;
 }

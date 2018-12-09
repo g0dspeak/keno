@@ -33,4 +33,5 @@
     <h3>You total spent: <span class="total_spent"></span></h3>
     <h3>You total won: <span class="total_win"></span></h3>
     <h3>Your profit is: <span class="total_profit"></span></h3>
+    <h4 class="error-info-helper-block">Game was interrupted due to timeout error</h4>
 </div>

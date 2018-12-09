@@ -27,7 +27,7 @@ class KenoUsageController extends Controller
 
     public function countResults(Request $request)
     {
-        set_time_limit(90);
+        set_time_limit(Game::GAME_TIME_LIMIT + 1);
 
         $keno = new Game($request->all());
 
